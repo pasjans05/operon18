@@ -18,51 +18,55 @@ unsigned long long int XtoDEC(int n, string a)
 		bb = 0;
 		switch (b)
 		{
-			case '1':
-				bb = 1;
-				break;
-			case '2': 
-				bb = 2;
-				break;
-			case '3': 
-				bb = 3;
-				break;
-			case '4': 
-				bb = 4;
-				break;
-			case '5': 
-				bb = 5;
-				break;
-			case '6': 
-				bb = 6;
-				break;
-			case '7': 
-				bb = 7;
-				break;
-			case '8': 
-				bb = 8;
-				break;
-			case '9': 
-				bb = 9;
-				break;
-			case 'A': 
-				bb = 10;
-				break;
-			case 'B': 
-				bb = 11;
-				break;
-			case 'C': 
-				bb = 12;
-				break;
-			case 'D': 
-				bb = 13;
-				break;
-			case 'E': 
-				bb = 14;
-				break;
-			case 'F': 
-				bb = 15;
-				break;
+		case '1':
+			bb = 1;
+			break;
+		case '2':
+			bb = 2;
+			break;
+		case '3':
+			bb = 3;
+			break;
+		case '4':
+			bb = 4;
+			break;
+		case '5':
+			bb = 5;
+			break;
+		case '6':
+			bb = 6;
+			break;
+		case '7':
+			bb = 7;
+			break;
+		case '8':
+			bb = 8;
+			break;
+		case '9':
+			bb = 9;
+			break;
+		case 'A':
+			bb = 10;
+			break;
+		case 'B':
+			bb = 11;
+			break;
+		case 'C':
+			bb = 12;
+			break;
+		case 'D':
+			bb = 13;
+			break;
+		case 'E':
+			bb = 14;
+			break;
+		case 'F':
+			bb = 15;
+			break;
+		}
+		if (n <= bb)
+		{
+			return 1;
 		}
 		dec += bb*pow(n, j);
 		j++;
@@ -91,8 +95,11 @@ void Jeden()
 		plik >> a >> b >> c;
 		for (int i = 2; i <= 16; i++)
 		{
-			if (sysSpr(a, b, c, i)) SYS[i - 2]++;
-			//cout << a << "\t" << b << "\t" << c << "\t" << XtoDEC(i, a) << " + " << XtoDEC(i, b) << " = " << XtoDEC(i, c) << "\t" << sysSpr(a, b, c, i) << "\t" << i << endl;
+			if (sysSpr(a, b, c, i))
+			{
+				SYS[i - 2]++;
+				break;
+			}
 		}
 	}
 	for (int i = 0; i < 15; i++) cout << "System " << i + 2 << ": \t" << SYS[i] << endl;
