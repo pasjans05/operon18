@@ -9,7 +9,7 @@ ifstream plik("trzyliczby.txt");
 long int XtoDEC(int n, string a)
 {
 	char b;
-	long int dec = 0;
+	long long int dec = 0;
 	int j = 1;
 	for (int i = a.length(); i > 0; i--)
 	{
@@ -20,23 +20,24 @@ long int XtoDEC(int n, string a)
 		if (b == 'D') b = 13;
 		if (b == 'E') b = 14;
 		if (b == 'F') b = 15;
-		dec += j * b;
+		dec += b*pow(n, j);
+		j++;
 	}
 	return dec;
 }
 
 bool sysSpr(string a, string b, string c, int n)
 {
-	long int DECa = XtoDEC(n, a);
-	long int DECb = XtoDEC(n, b);
-	long int DECc = XtoDEC(n, c);
+	long long int DECa = XtoDEC(n, a);
+	long long int DECb = XtoDEC(n, b);
+	long long int DECc = XtoDEC(n, c);
 	if (DECa + DECb == DECc) return true;
 	else return false;
 }
 
 void Jeden()
 {
-	int SYS[14];
+	int SYS[15];
 	for (int i = 0; i <= 14; i++) SYS[i] = 0;
 	string a;
 	string b;
