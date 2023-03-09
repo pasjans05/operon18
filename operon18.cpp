@@ -2,9 +2,12 @@
 //
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 using namespace std;
 
 ifstream plik("trzyliczby.txt");
+
+float ZNAK[15];
 
 unsigned long long int XtoDEC(int n, string a)
 {
@@ -90,24 +93,147 @@ void Jeden()
 	string a;
 	string b;
 	string c;
+	int max;
+	int min;
 	for (int i = 0; i < 100; i++)
 	{
 		plik >> a >> b >> c;
-		for (int i = 2; i <= 16; i++)
+		for (int j = 2; j <= 16; j++)
 		{
-			if (sysSpr(a, b, c, i))
+			if (sysSpr(a, b, c, j))
 			{
-				SYS[i - 2]++;
+				SYS[j - 2]++;
+				if (i == 0)
+				{
+					max = XtoDEC(j, a);
+					min = max;
+				}
+				if (XtoDEC(j, a) > max) max = XtoDEC(j, a);
+				if (XtoDEC(j, b) > max) max = XtoDEC(j, b);
+				if (XtoDEC(j, c) > max) max = XtoDEC(j, c);
+				if (XtoDEC(j, a) < min) min = XtoDEC(j, a);
+				if (XtoDEC(j, b) < min) min = XtoDEC(j, b);
+				if (XtoDEC(j, c) < min) min = XtoDEC(j, c);
 				break;
 			}
 		}
 	}
+	plik.close();
+	plik.open("trzyliczby.txt");
 	for (int i = 0; i < 15; i++) cout << "System " << i + 2 << ": \t" << SYS[i] << endl;
+	cout << endl << "Największa wartość: " << max << endl << "Najmniejsza wartość: " << min << endl;
+}
+
+void Znaki(string a)
+{
+	for (int i = 0; i < a.length(); i++)
+	{
+		int b = a[i];
+		switch (b)
+		{
+		case '0':
+			ZNAK[0]++;
+			break;
+		case '1':
+			ZNAK[1]++;
+			break;
+		case '2':
+			ZNAK[2]++;
+			break;
+		case '3':
+			ZNAK[3]++;
+			break;
+		case '4':
+			ZNAK[4]++;
+			break;
+		case '5':
+			ZNAK[5]++;
+			break;
+		case '6':
+			ZNAK[6]++;
+			break;
+		case '7':
+			ZNAK[7]++;
+			break;
+		case '8':
+			ZNAK[8]++;
+			break;
+		case '9':
+			ZNAK[9]++;
+			break;
+		case 'A':
+			ZNAK[10]++;
+			break;
+		case 'B':
+			ZNAK[11]++;
+			break;
+		case 'C':
+			ZNAK[12]++;
+			break;
+		case 'D':
+			ZNAK[13]++;
+			break;
+		case 'E':
+			ZNAK[14]++;
+			break;
+		case 'F':
+			ZNAK[15]++;
+			break;
+		}
+	}
+}
+
+void Trzy()
+{
+	for (int i = 0; i < 16; i++) ZNAK[i] = 0;
+	int sum = 0;
+	string a;
+	string b;
+	string c;
+	for (int i = 0; i < 100; i++)
+	{
+		plik >> a >> b >> c;
+		sum += a.length() + b.length() + c.length();
+		Znaki(a);
+		Znaki(b);
+		Znaki(c);
+	}
+	plik.close();
+	for (int i = 0; i < 16; i++)
+	{
+		ZNAK[i] *= 100;
+		ZNAK[i] /= sum;
+		if (ZNAK[i] >= 10) cout << setprecision(4);
+		else if (ZNAK[i] >= 1) cout << setprecision(3);
+		else if (ZNAK[i] < 1) cout << setprecision(2);
+		if (i < 10) cout << i << ":\t" << ZNAK[i] << "%\n";
+		switch (i)
+		{
+		case 10:
+			cout << "A:\t" << ZNAK[i] << "%\n";
+			break;
+		case 11:
+			cout << "B:\t" << ZNAK[i] << "%\n";
+			break;
+		case 12:
+			cout << "C:\t" << ZNAK[i] << "%\n";
+			break;
+		case 13:
+			cout << "D:\t" << ZNAK[i] << "%\n";
+			break;
+		case 14:
+			cout << "E\t" << ZNAK[i] << "%\n";
+			break;
+		case 15:
+			cout << "F\t" << ZNAK[i] << "%\n";
+		}
+	}
 }
 
 int main()
 {
 	Jeden();
+	Trzy();
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
