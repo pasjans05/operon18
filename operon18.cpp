@@ -15,6 +15,7 @@ unsigned long long int XtoDEC(int n, string a)
 	for (int i = a.length()-1; i >= 0; i--)
 	{
 		b = a[i];
+		bb = 0;
 		switch (b)
 		{
 			case '1':
@@ -80,8 +81,8 @@ bool sysSpr(string a, string b, string c, int n)
 
 void Jeden()
 {
-	int SYS[15];
-	for (int i = 0; i <= 14; i++) SYS[i] = 0;
+	int SYS[15]{};
+	for (int i = 0; i < 15; i++) SYS[i] = 0;
 	string a;
 	string b;
 	string c;
@@ -90,21 +91,16 @@ void Jeden()
 		plik >> a >> b >> c;
 		for (int i = 2; i <= 16; i++)
 		{
-			if (sysSpr(a, b, c, i)) SYS[i - 2] += 1;
-			cout << a << "\t" << b << "\t" << c << "\t" << XtoDEC(i, a) << " + " << XtoDEC(i, b) << " = " << XtoDEC(i, c) << "\t" << sysSpr(a, b, c, i) << "\t" << i << endl;
+			if (sysSpr(a, b, c, i)) SYS[i - 2]++;
+			//cout << a << "\t" << b << "\t" << c << "\t" << XtoDEC(i, a) << " + " << XtoDEC(i, b) << " = " << XtoDEC(i, c) << "\t" << sysSpr(a, b, c, i) << "\t" << i << endl;
 		}
 	}
-	for (int i = 0; i <= 14; i++)
-	{
-		cout << "System " << i + 2 << ": \t" << SYS[i] << endl;
-	}
+	for (int i = 0; i < 15; i++) cout << "System " << i + 2 << ": \t" << SYS[i] << endl;
 }
 
 int main()
 {
 	Jeden();
-	//string n = "F";
-	//cout << XtoDEC(2, n);
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
