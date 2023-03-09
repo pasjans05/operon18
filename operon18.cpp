@@ -6,21 +6,64 @@ using namespace std;
 
 ifstream plik("trzyliczby.txt");
 
-long int XtoDEC(int n, string a)
+unsigned long long int XtoDEC(int n, string a)
 {
 	char b;
-	long long int dec = 0;
-	int j = 1;
-	for (int i = a.length(); i > 0; i--)
+	int bb = 0;
+	unsigned long long int dec = 0;
+	int j = 0;
+	for (int i = a.length()-1; i >= 0; i--)
 	{
 		b = a[i];
-		if (b == 'A') b = 10;
-		if (b == 'B') b = 11;
-		if (b == 'C') b = 12;
-		if (b == 'D') b = 13;
-		if (b == 'E') b = 14;
-		if (b == 'F') b = 15;
-		dec += b*pow(n, j);
+		switch (b)
+		{
+			case '1':
+				bb = 1;
+				break;
+			case '2': 
+				bb = 2;
+				break;
+			case '3': 
+				bb = 3;
+				break;
+			case '4': 
+				bb = 4;
+				break;
+			case '5': 
+				bb = 5;
+				break;
+			case '6': 
+				bb = 6;
+				break;
+			case '7': 
+				bb = 7;
+				break;
+			case '8': 
+				bb = 8;
+				break;
+			case '9': 
+				bb = 9;
+				break;
+			case 'A': 
+				bb = 10;
+				break;
+			case 'B': 
+				bb = 11;
+				break;
+			case 'C': 
+				bb = 12;
+				break;
+			case 'D': 
+				bb = 13;
+				break;
+			case 'E': 
+				bb = 14;
+				break;
+			case 'F': 
+				bb = 15;
+				break;
+		}
+		dec += bb*pow(n, j);
 		j++;
 	}
 	return dec;
@@ -28,9 +71,9 @@ long int XtoDEC(int n, string a)
 
 bool sysSpr(string a, string b, string c, int n)
 {
-	long long int DECa = XtoDEC(n, a);
-	long long int DECb = XtoDEC(n, b);
-	long long int DECc = XtoDEC(n, c);
+	unsigned long long int DECa = XtoDEC(n, a);
+	unsigned long long int DECb = XtoDEC(n, b);
+	unsigned long long int DECc = XtoDEC(n, c);
 	if (DECa + DECb == DECc) return true;
 	else return false;
 }
@@ -48,6 +91,7 @@ void Jeden()
 		for (int i = 2; i <= 16; i++)
 		{
 			if (sysSpr(a, b, c, i)) SYS[i - 2] += 1;
+			cout << a << "\t" << b << "\t" << c << "\t" << XtoDEC(i, a) << " + " << XtoDEC(i, b) << " = " << XtoDEC(i, c) << "\t" << sysSpr(a, b, c, i) << "\t" << i << endl;
 		}
 	}
 	for (int i = 0; i <= 14; i++)
@@ -58,15 +102,9 @@ void Jeden()
 
 int main()
 {
-	/*string a;
-	string b;
-	string c;
-	for (int i = 0; i < 100; i++)
-	{
-		plik >> a >> b >> c;
-		cout << a << "\t" << b << "\t" << c << endl;
-	}*/
 	Jeden();
+	//string n = "F";
+	//cout << XtoDEC(2, n);
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
